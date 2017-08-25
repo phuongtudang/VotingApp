@@ -47,7 +47,7 @@ router.post("/register", function(req, res){
             return res.render("register", {"error": err.message});
         } else {
             passport.authenticate("local")(req, res, function(){
-                res.redirect("back"); 
+                res.redirect("/"); 
             });
         }
     });

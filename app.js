@@ -14,13 +14,15 @@ var Chart = require('chart.js');
 //requiring routes
 var indexRoutes      = require("./routes/index")
 
-mongoose.connect("mongodb://localhost/votingapp1", function (err, db) {
+var url = "mongodb://phuong:phuong@ds159953.mlab.com:59953/votingapp" || "mongodb://localhost/votingapp1"
+mongoose.connect(url, function (err, db) {
     if (err) {
         console.log("Unable to connect to server", err);
     } else {
         console.log("Connected to server");
     }
 });
+
 
 app.set("view engine", "ejs");
 
