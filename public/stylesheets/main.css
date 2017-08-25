@@ -86,5 +86,14 @@ select{
 }
 
 #back-button{
-    width: 50%;
+    width: 35%;
+}
+
+#submit-button{
+    margin-top: 20px;
+    width: 33%;
+}
+
+#twitter{
+    width: 35%;
 }

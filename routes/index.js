@@ -66,13 +66,12 @@ router.post("/login", passport.authenticate("local",
     }), function(req, res){
 });
 
-// logic route
+// log out logic route
 router.get("/logout", function(req, res){
     req.logout();
     req.flash("success", "Logged you out!")
     res.redirect("/");
 });
-
 
 // new poll route
 router.get('/new', isLoggedIn, function(req, res) {
