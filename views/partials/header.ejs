@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Voting App</title>
+		<link rel="shortcut icon" href="http://thinkvoting.com/wp-content/uploads/v1.png">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+		<link rel="stylesheet" href="/stylesheets/main.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"> </script>
+		
+	</head>
+
+	<body>
+
+
+
+<div class="jumbotron">
+    <nav class="navbar">
+        <a class="navbar-brand" href="/">HOME</a>
+        <ul class="nav navbar-nav navbar-right">
+        <li class="nav-item">
+            <% if(!currentUser){ %>
+                <a class="btn btn-outline-light" href="/login">LOGIN</a>
+                <a class="btn btn-warning" href="/register">SIGNUP</a>
+            <% } else{ %>
+            <a id="username" href="#">Signed in as <%= currentUser.username %></a>
+            <a class="btn btn-danger" href="/logout">Logout</a>
+            <% } %>
+        </li>
+        </ul>
+    </nav>
+
+    <div class="content-center">
+        <h1 class="display-3 text-center">Voting App</h1>
+        <p class="lead" style="text-align: center;">Select a poll to vote and see the results, or sign-in to make a new poll.</p>
+  
+        <div class="text-center">
+            <a id='newpoll' role="button" class="btn btn-outline-light" href='/new'>Create a new poll..</a>
+            <br>
+            <br>
+        </div>  
+    </div>
+   
+</div>
+<div class="container">
+    <div class="row">
+        <div id="survey" class="col-6">
+            <div id="alert-box">
+                <% if(error && error.length >0){ %>
+                <div class="alert alert-danger" role="alert"><%= error %></div>
+                <% } %>
+                <% if(success && success.length >0){ %>
+                <div class="alert alert-success" role="alert"><%= success %></div>
+                <% } %>
+            </div>   
+        </div>
+    </div>
+</div>
+

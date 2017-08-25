@@ -1,0 +1,24 @@
+<% include partials/header %>
+
+
+  <h1>Your surveys</h1>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div id="survey" class="col-6">
+        <div class="list-group" id="list-tab" role="tablist">
+          <% surveys.forEach(function(survey){ %>
+            <a href="/<%= survey.id %>" class="list-group-item list-group-item-action"><%= survey.question %></a>
+          <% }); %>
+        </div>
+        
+      </div>
+      
+    </div>  
+    
+  </div>
+  <br>
+  <br>
+
+
+<% include partials/footer %>

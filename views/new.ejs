@@ -1,0 +1,30 @@
+<% include partials/header %>
+
+
+
+<h1>Create a new poll</h1>
+
+<form action="/" method="POST">
+  <div class="form-group">
+    <label>Enter your question</label>
+    <input type="text" class="form-control" name="question" placeholder="Enter one question">
+  </div>
+  <div id="optionList" class="form-group">
+    <label>Options</label>
+    <div>
+        <input id ="option" type="text" name="options" class="form-control" placeholder="Option 1" required>
+    </div>
+    <div>
+        <input id ="option" type="text" name="options" class="form-control" placeholder="Option 2" required>
+    </div>
+  </div>
+  <a class="btn btn-outline-secondary float-left" onClick="addMoreOption('optionList') ">Add more options</a>
+  <button type="submit" class="btn btn-success float-right">Create</button>
+</form>
+<br>
+<br>
+
+
+
+
+<% include partials/footer %>
