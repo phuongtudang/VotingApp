@@ -5,6 +5,12 @@ var userSchema = new mongoose.Schema({
     local: {
         username: String,
         password: String,
+    },
+    twitter          : {
+        id           : String,
+        token        : String,
+        displayName  : String,
+        username     : String
     }
 });
 
