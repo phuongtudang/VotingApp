@@ -68,8 +68,12 @@ select{
 }
 
 #newpoll{
-    width: 30%;
+    width: 23%;
     margin-top: 10px
+}
+
+#newpoll:hover{
+    color: black;
 }
 
 #space{
@@ -92,12 +96,16 @@ select{
     text-align: center
 }
 
-#back-button{
-    width: 35%;
-}
 
 #submit-button{
     margin-top: 20px;
     width: 38%;
 }
 
+#answer-form{
+    width: 50%;
+}
+
+#answer-submit{
+    width: 70%;
+}
