@@ -53,7 +53,8 @@ passport.use(new TwitterStrategy({
     callbackURL: "https://pongvoting.herokuapp.com/auth/twitter/callback"
     },
     function(token, tokenSecret, profile, done) {
-        User.findOne({twitterId: profile.id }, function (err, user) {
+        User.findOne({'twitter.id': profile.id }, function (err, user) {
+            console.log(profile.id)
             if(err){
                 return done(err);
             }
@@ -61,7 +62,7 @@ passport.use(new TwitterStrategy({
                 done(null, user);
             } else{
                 var user = new User();
-                user.id = profile.id;
+                user.twitter.id = profile.id;
                 user.username = profile.displayName;
                 user.save(function(err){
                     if(err){
