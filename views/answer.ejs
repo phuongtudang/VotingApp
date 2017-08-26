@@ -1,70 +1,73 @@
 <% include partials/header %>
 
-    <br>
-    
-    <br>
-    <div class="container">
-        <div class="row">
-            <div class="col-6">
-                
-                <h3><%= survey.question%></h3>
-                
-                <form action="/<%= survey._id%>?_method=PUT" method="POST">
-                    <div class="custom-controls-stacked">
-                    <% for(var i = 0; i < survey.options.length; i++){ %>
-                        <label class="custom-control custom-radio">
-                            <input id="radioStacked3" name="option" type="radio" value="<%= survey.options[i].text %>" class="custom-control-input">
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description"><%= survey.options[i].text %></span>
-                        </label>
-                    <% } %>
-                    <br>
-                    <input class="btn btn-success" type="submit" value="Submit">
-                </div>
-                </form>
-                <% if(currentUser && survey.author.id.equals(currentUser._id)){ %>
-                    <form action="/<%= survey._id%>?_method=DELETE" method="POST">
-                        <button id="delete-button" class="btn btn-outline-danger">Delete survey</button>
-                    </form>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h3><%= survey.question%></h3>
+            <form action="/<%= survey._id%>?_method=PUT" method="POST">
+                <div class="custom-controls-stacked">
+                <% for(var i = 0; i < survey.options.length; i++){ %>
+                    <label class="custom-control custom-radio">
+                        <input id="radioStacked3" name="option" type="radio" value="<%= survey.options[i].text %>" class="custom-control-input">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description"><%= survey.options[i].text %></span>
+                    </label>
                 <% } %>
-                <div class="text-center">
-                    <button id="back-button" href="#" class="btn btn-outline-primary">Share on Twitter</button>
-                </div>
+                <br>
+                <input class="btn btn-success" type="submit" value="Submit">
             </div>
-            <div class="col-6">
-                <div>
-                    <canvas id="myChart" width="100" height="50"></canvas>
-                </div>
-            </div>  
+            </form>
+            <form>
+                <a class="twitter btn btn-outline-primary" target="_blank"
+                    href="https://twitter.com/share"
+                    data-size="large"
+                    data-text="Please response to this survey!"
+                    data-url="https://pongvoting.herokuapp.com/<%= survey._id%>"
+                    data-related="twitterapi,twitter">
+                    <i class="fa fa-twitter" aria-hidden="true"></i> Share on Twitter
+                </a>
+            </form>
+            <% if(currentUser && survey.author.id.equals(currentUser._id)){ %>
+                <form action="/<%= survey._id%>?_method=DELETE" method="POST">
+                    <button id="delete-button" class="btn btn-outline-danger">Delete survey</button>
+                </form>
+            <% } %>
         </div>
+        <div class="col-6">
+            <div>
+                <canvas id="myChart" width="100" height="50"></canvas>
+            </div>
+        </div>  
     </div>
- 
-
+</div>
 
 <script>
         
-            var ctx = document.getElementById('myChart').getContext('2d');
+    var ctx = document.getElementById('myChart').getContext('2d');
         
-            var chart = new Chart(ctx, {
-                // The type of chart we want to create
-                type: 'pie',
-                // The data for our dataset
-                data: {
-                    datasets: [{
-                        data: [],
-                        backgroundColor:   ['#ff6384', '#36a2eb', '#FFF59D', '#81C784', '#85C1E9', '#5D6D7E','#F0B27A'],
-                    }],
-                // These labels appear in the legend and in the tooltips when hovering different arcs
-                    labels: [],
-                },
-                // Configuration options go here
-                options: {}
-            });
-            <% survey.options.forEach(function(option){ %>
-                chart.data.datasets[0].data.push(<%= option.votes %>);
-                chart.data.labels.push("<%= option.text %>");
-                chart.update()
-            <% }) %>
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'pie',
+        // The data for our dataset
+        data: {
+            datasets: [{
+                data: [],
+                backgroundColor:   ['#ff6384', '#36a2eb', '#FFF59D', '#81C784', '#85C1E9', '#5D6D7E','#F0B27A'],
+                  }],
+        // These labels appear in the legend and in the tooltips when hovering different arcs
+            labels: [],
+        },
+        // Configuration options go here
+        options: {}
+    });
+    <% survey.options.forEach(function(option){ %>
+        chart.data.datasets[0].data.push(<%= option.votes %>);
+        chart.data.labels.push("<%= option.text %>");
+        chart.update()
+    <% }) %>
             
 </script>
+
 <% include partials/footer %>

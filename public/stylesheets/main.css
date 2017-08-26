@@ -11,7 +11,7 @@
 .jumbotron{
     border-radius: 0;
     padding: 0;
-    background-image: linear-gradient(rgba(51, 0, 51, 0.92), rgba(125, 0, 185, 0.65)), url('https://images.unsplash.com/photo-1444212568492-d2799d30943b?dpr=1&auto=format&fit=crop&w=1500&h=998&q=80&cs=tinysrgb&crop=');
+    background-image: linear-gradient(rgba(51, 0, 51, 0.92), rgba(125, 0, 185, 0.65)), url('https://images.unsplash.com/photo-1502386256291-491f4f6a2ae6?dpr=1&auto=format&fit=crop&w=1500&h=844&q=80&cs=tinysrgb&crop=');
 }
 
 .footer{
@@ -30,12 +30,20 @@
     color: rgba(255, 255, 255, 0.7);
 }
 
+.lead:hover{
+    color: rgba(255, 255, 255, 0.7);
+}
+
 .navbar-brand{
     color: #FFFFFF;
 }
 
 .navbar-brand:hover{
     color: rgba(255, 255, 255, 0.7);
+}
+
+.twitter{
+    width: 100%;
 }
 
 form{
@@ -64,9 +72,8 @@ select{
     margin-top: 10px
 }
 
-#mypoll{
-    margin-top: 40px;
-    width: 100%;
+#space{
+   margin-left: 23px;
 }
 
 #survey{
@@ -91,9 +98,6 @@ select{
 
 #submit-button{
     margin-top: 20px;
-    width: 33%;
+    width: 38%;
 }
 
-#twitter{
-    width: 35%;
-}

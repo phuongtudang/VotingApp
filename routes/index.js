@@ -7,7 +7,13 @@ var User = require("../models/user");
 var Survey = require('../models/survey');
 var includes = require('array-includes');
 
-
+function isLoggedIn (req, res, next) {
+		if (req.isAuthenticated()) {
+			return next();
+		} else {
+			res.redirect('/login');
+		}
+	}
 
 router.get('/', function(req,res){
     Survey.find({}, function(err, allSurveys){
@@ -19,18 +25,6 @@ router.get('/', function(req,res){
        }
     });
 });
-
-//  ===========
-// AUTH ROUTES
-//  ===========
-
-function isLoggedIn (req, res, next) {
-		if (req.isAuthenticated()) {
-			return next();
-		} else {
-			res.redirect('/login');
-		}
-	}
 	
 // show register form
 router.get('/register', function(req, res){
@@ -76,7 +70,7 @@ router.get("/logout", function(req, res){
 // new poll route
 router.get('/new', isLoggedIn, function(req, res) {
     res.render('new')
-})
+});
 
 router.post("/", isLoggedIn, function(req, res){
     var survey = new Survey();
@@ -110,7 +104,7 @@ router.get('/surveys', isLoggedIn, function(req, res) {
             res.render('mysurveys', {surveys: surveys})
         }
     })
-})
+});
      
 // show poll route
 router.get('/:id', function(req, res){
@@ -122,28 +116,28 @@ router.get('/:id', function(req, res){
             res.render("answer", {survey: foundSurvey});
         }
     });
-})
+});
 
 // post vote to poll router
 function checkIP (req, res, next){
-        Survey.findById(req.params.id, function(err, foundSurvey){
-            if(err){
-                console.log(err);
-                res.redirect("/");
+    Survey.findById(req.params.id, function(err, foundSurvey){
+        if(err){
+            console.log(err);
+            res.redirect("/");
+        } else{
+            console.log(foundSurvey.voterIP);
+            var arr = foundSurvey.voterIP;
+            if(!includes(arr, req.headers["x-forwarded-for"])){
+                console.log("good to go");
+                return next();
             } else{
-                console.log(foundSurvey.voterIP);
-                var arr = foundSurvey.voterIP;
-                if(!includes(arr, req.headers["x-forwarded-for"])){
-                    console.log("good to go");
-                    return next();
-                } else{
-                    console.log("IP found. Cant vote again!");
-                    req.flash("error", "You only can vote once!");
-                    res.redirect("back");
-                }
-            }    
-        });    
-    }
+                console.log("IP found. Cant vote again!");
+                req.flash("error", "You only can vote once!");
+                res.redirect("back");
+            }
+        }    
+    });    
+}
     
 router.put('/:id', checkIP, function(req, res){
     var IP = req.headers["x-forwarded-for"];
@@ -154,7 +148,6 @@ router.put('/:id', checkIP, function(req, res){
             console.log(err);
             res.redirect('/')
         } else {
-            // console.log(req.body.option)
             res.redirect("/" + req.params.id)
         }
     });
@@ -167,12 +160,10 @@ router.delete('/:id', function(req, res){
             console.log(err);
             res.redirect('/')
         } else{
-            req.flash("success", "Your survey deleted!")
+            req.flash("success", "Your survey deleted!");
             res.redirect('/')
         }
-    })
-})
-
-
+    });
+});
 
 module.exports = router;

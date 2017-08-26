@@ -18,5 +18,4 @@ var surveySchema = new mongoose.Schema({
     voterIP: [String]
 })
 
-
 module.exports = mongoose.model("Survey", surveySchema);

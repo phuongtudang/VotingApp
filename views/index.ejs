@@ -1,19 +1,17 @@
 <% include partials/header %>
+
   <br>
-  
   <div class="container">
     <div class="row">
       <div id="survey" class="col-6">
+        <h3>Choose one to vote</h3>
+        <br>
         <div class="list-group" id="list-tab" role="tablist">
           <% surveys.forEach(function(survey){ %>
             <a href="/<%= survey.id %>" class="list-group-item list-group-item-action"><%= survey.question %></a>
           <% }); %>
         </div>
-        <div class="text-center">
-          <a id='mypoll' role="button" class="btn btn-outline-primary" href='/surveys'>Go to my surveys..</a>
-        </div>
       </div>
-      
     </div>  
   </div>
 

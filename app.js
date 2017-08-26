@@ -18,7 +18,7 @@ var TWITTER_CONSUMER_SECRET = "2D9jD0jtPDhwIvc4Jt6qVdtqX0ZhrNffjazj5xrzemoCyASUt
 var indexRoutes      = require("./routes/index")
 
 // var url = "mongodb://localhost/votingapp1"
-mongoose.connect(process.env.DATABASEURL, function (err, db) {
+mongoose.connect("mongodb://phuong:phuong@ds159953.mlab.com:59953/votingapp", function (err, db) {
     if (err) {
         console.log("Unable to connect to server", err);
     } else {
